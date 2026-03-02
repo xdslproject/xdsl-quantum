@@ -1,4 +1,3 @@
 # Reference
 
-<!-- TODO: Change this -->
-::: xdsltemplate.compiler
+::: xdsl_quantum.compiler

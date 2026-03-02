@@ -2,13 +2,9 @@ name: docs
 
 on:
   workflow_dispatch:
-  # TODO: Uncomment the following lines to automatically deploy documentation
-  #       when pushing to main. Additional settings may need to be configured
-  #       in the GitHub repository for this to be publically visible.
-  #       (<https://squidfunk.github.io/mkdocs-material/publishing-your-site/>)
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write

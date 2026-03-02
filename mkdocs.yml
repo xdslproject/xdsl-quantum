@@ -1,19 +1,19 @@
 # https://www.mkdocs.org/user-guide/configuration/
 
 # Project information
-site_name: xdsl-template                                                        # TODO: Change this
-site_author: xDSL Developers                                                    # TODO: Change this
-copyright: Copyright &copy xDSL Developers                                      # TODO: Change this
+site_name: xdsl-quantum
+site_author: xDSL Developers
+copyright: Copyright &copy xDSL Developers
 
 # Repository
-repo_name: xdslproject/xdsl-template                                            # TODO: Change this
-repo_url: https://github.com/xdslproject/xdsl-template                          # TODO: Change this
+repo_name: xdslproject/xdsl-quantum
+repo_url: https://github.com/xdslproject/xdsl-quantum
 
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/xdsl                                             # TODO: Change this
-      name: xDSL on Github                                                      # TODO: Change this
+      link: https://github.com/xdslproject/xdsl-quantum
+      name: xDSL Quantum on Github
 
 
 # Configuration

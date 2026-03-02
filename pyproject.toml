@@ -1,6 +1,6 @@
 [project]
-name = "xdsltemplate"                                                           # TODO: Change this
-description = "A template project using xDSL."                                  # TODO: Change this
+name = "xdsl_quantum"
+description = "Utilities for quantum compilers."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -11,16 +11,19 @@ classifiers = [
     "Typing :: Typed"
 ]
 license = { text = "Apache License v2.0 with LLVM Exceptions" }
-authors = []                                                                    # TODO: Change this
+authors = [
+    { name = "Sasha Lopoukhine", email = "sasha.lopoukhine@cl.cam.ac.uk" },
+    { name = "Alex Rice", email = "alex.rice@cl.cam.ac.uk" },
+]
 dynamic = ["version"]
 
 [project.entry-points.'xdsl.universe']
-xdsl_template = 'xdsltemplate.universe:UNIVERSE'                                # TODO: Change this
+xdsl_quantum = 'xdsl_quantum.universe:UNIVERSE'
 
 [project.urls]
-Homepage = "https://xdsl.dev/xdsl-template"                                     # TODO: Change this
-"Source Code" = "https://github.com/xdslproject/xdsl-template"                  # TODO: Change this
-"Issue Tracker" = "https://github.com/xdslproject/xdsl-template/issues"         # TODO: Change this
+Homepage = "https://xdsl.dev/xdsl-quantum"
+"Source Code" = "https://github.com/xdslproject/xdsl-quantum"
+"Issue Tracker" = "https://github.com/xdslproject/xdsl-quantum/issues"
 
 
 [build-system]

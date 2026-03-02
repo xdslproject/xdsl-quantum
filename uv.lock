@@ -950,7 +950,7 @@ wheels = [
 ]
 
 [[package]]
-name = "xdsltemplate"
+name = "xdsl-quantum"
 source = { editable = "." }
 dependencies = [
     { name = "xdsl" },
