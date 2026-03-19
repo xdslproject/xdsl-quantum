@@ -36,7 +36,7 @@ dev = [
     "pre-commit>=4.0.1",
     "pytest>=8.3.4",
     "pytest-cov",
-    "pyright==1.1.407",
+    "pyright==1.1.408",
     "psutil",
 ]
 docs = ["mkdocs-material>=9.5.48", "mkdocstrings[python]>=0.26.1"]
