@@ -3,7 +3,7 @@ name = "xdsl_quantum"
 description = "Utilities for quantum compilers."
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["xdsl~=0.59.0"]
+dependencies = ["xdsl~=0.60.0"]
 classifiers = ["Programming Language :: Python :: 3 :: Only", "Typing :: Typed"]
 license = { text = "Apache License v2.0 with LLVM Exceptions" }
 authors = [
