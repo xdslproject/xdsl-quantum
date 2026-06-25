@@ -48,4 +48,4 @@ jobs:
         run: make venv
 
       - name: Run the pre-commit static checks
-        run: make check
+        run: make precommit
