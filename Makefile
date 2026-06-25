@@ -1,44 +1,59 @@
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
 
-# allow overriding which dependency groups are installed
-VENV_GROUPS ?= --group dev --group docs
+# allow overriding the name of the venv directory
+VENV_DIR ?= .venv
+
+# use activated venv if any
+export UV_PROJECT_ENVIRONMENT=$(if $(VIRTUAL_ENV),$(VIRTUAL_ENV),$(VENV_DIR))
+
+# allow overriding which extras are installed
+VENV_EXTRAS ?= --all-extras
+VENV_GROUPS ?= --all-groups
 
 # set default lit options
 LIT_OPTIONS ?= -v --order=smart
+PYTEST_OPTIONS ?= -vv
 
+.PHONY: uv-installed
+uv-installed:
+	@command -v uv &> /dev/null ||\
+		(echo "UV doesn't seem to be installed, try the following instructions:" &&\
+		echo "https://docs.astral.sh/uv/getting-started/installation/" && false)
 
-.PHONY: install
-install: .venv/ pre-commit
+# set up the venv with all dependencies for development
+.PHONY: ${VENV_DIR}/
+${VENV_DIR}/: uv-installed
+	uv sync ${VENV_EXTRAS} ${VENV_GROUPS}
 
-.venv/:
-	uv sync ${VENV_GROUPS}
+.PHONY: venv
+venv: ${VENV_DIR}/ ## make sure `make venv` also works correctly
 
-.PHONY: pre-commit
-pre-commit: .venv/
-	uv run pre-commit install
+.PHONY: precommit-install
+precommit-install: uv-installed ## set up all precommit hooks
+	uv run prek install
 
-.PHONY: check
-check: .venv/
-	uv run pre-commit run --all-files
+.PHONY: precommit
+precommit: uv-installed ## run all precommit hooks and apply them
+	uv run prek run --all-files
 
 .PHONY: pyright
-pyright: .venv/
+pyright: uv-installed
 	uv run pyright $(shell git diff --staged --name-only  -- '*.py')
 
 .PHONY: tests
 tests: pytest filecheck
 
 .PHONY: pytest
-pytest: .venv/
-	uv run pytest -W error --cov
+pytest: uv-installed
+	uv run pytest -W error --cov $(PYTEST_OPTIONS)
 
 .PHONY: filecheck
-filecheck: .venv/
+filecheck: uv-installed
 	uv run lit $(LIT_OPTIONS) tests/filecheck
 
 .PHONY: docs
-docs: .venv/
+docs: uv-installed
 	uv run mkdocs serve
 	uv run mkdocs build
 
