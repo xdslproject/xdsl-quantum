@@ -16,11 +16,11 @@ install: .venv/ pre-commit
 
 .PHONY: pre-commit
 pre-commit: .venv/
-	uv run pre-commit install
+	uv run prek install
 
 .PHONY: check
 check: .venv/
-	uv run pre-commit run --all-files
+	uv run prek run --all-files
 
 .PHONY: pyright
 pyright: .venv/
@@ -41,6 +41,10 @@ filecheck: .venv/
 docs: .venv/
 	uv run mkdocs serve
 	uv run mkdocs build
+
+.PHONY: sync
+sync:
+	uvx sync-template sync
 
 .PHONY: clean-caches
 clean-caches:
