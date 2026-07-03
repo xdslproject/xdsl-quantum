@@ -22,7 +22,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = [ "version" ]
-dependencies = [ "xdsl~=0.67.0" ]
+dependencies = [ "xdsl~=0.68.0" ]
 urls."Issue Tracker" = "https://github.com/xdslproject/xdsl-quantum/issues"
 urls."Source Code" = "https://github.com/xdslproject/xdsl-quantum"
 urls.Homepage = "https://xdsl.dev/xdsl-quantum"
