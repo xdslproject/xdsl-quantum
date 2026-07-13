@@ -26,6 +26,6 @@ repos:
     - id: pyright
 
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: "v2.25.1"
+    rev: "v2.25.3"
     hooks:
       - id: pyproject-fmt
