@@ -211,6 +211,10 @@ cython_debug/
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+# Direnv
+.direnv
+.envrc
+
 # Operation system specific
 .DS_Store
 Thumbs.db

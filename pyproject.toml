@@ -38,7 +38,10 @@ dev = [
   "pytest>=8.3.4",
   "pytest-cov",
 ]
-docs = [ "mkdocs-material>=9.5.48", "mkdocstrings[python]>=0.26.1" ]
+docs = [
+  "mkdocs-material>=9.5.48",
+  "mkdocstrings[python]>=0.26.1",
+]
 
 [tool.hatch]
 version.source = "vcs"
@@ -63,23 +66,19 @@ exclude_dirs = [ ".venv/" ]
 skips = [ "B101" ]
 
 [tool.pyright]
-venv = ".venv"
-venvPath = "."
 typeCheckingMode = "strict"
 include = [ "docs", "src", "tests" ]
 extraPaths = [ "tests" ]
 enableExperimentalFeatures = true
+# Use specific rule ignore instead if necessary
+enableTypeIgnoreComments = false
 reportAssertAlwaysTrue = true
 reportUnnecessaryCast = true
 reportUnnecessaryIsInstance = true
 reportUnnecessaryTypeIgnoreComment = true
 
 [tool.pytest]
-ini_options.addopts = [
-  "--durations=20",
-  "--maxfail=5",
-  "--import-mode=importlib",
-]
+ini_options.addopts = [ "--durations=20", "--maxfail=5", "--import-mode=importlib" ]
 
 [tool.coverage]
 run.branch = true
@@ -97,6 +96,6 @@ report.exclude_lines = [
   "raise NotImplementedError",
   "raise RuntimeError",
   "raise TypeError",
-  "raise ValueError",
+  "raise ValueError"
 ]
 report.format = "markdown"
