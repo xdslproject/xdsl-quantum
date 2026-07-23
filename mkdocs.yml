@@ -15,7 +15,6 @@ extra:
       link: https://github.com/xdslproject/xdsl-quantum
       name: xDSL Quantum on Github
 
-
 # Configuration
 use_directory_urls: false
 
