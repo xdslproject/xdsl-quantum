@@ -14,16 +14,17 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.15.22
     hooks:
-    -   id: ruff
-        types_or: [ python, pyi, jupyter ]
-        args: [ --fix, --exit-non-zero-on-fix ]
-    -   id: ruff-format
-        types_or: [ python, pyi, jupyter ]
+      - id: ruff
+        types_or: [python, pyi, jupyter]
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+        types_or: [python, pyi, jupyter]
 
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.411
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: 0ee178619d696787ca73d210cc191d720868c631 # frozen: v3.9.6
     hooks:
-    - id: pyright
+      - id: prettier
+        types_or: [yaml]
 
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: "v2.25.3"
