@@ -3,7 +3,6 @@ from __future__ import annotations
 import math
 
 from xdsl.dialects.builtin import FloatData
-from xdsl.interfaces import HasFolderInterface
 from xdsl.ir import Dialect, ParametrizedAttribute, TypeAttribute
 from xdsl.irdl import (
     IRDLOperation,
@@ -29,7 +28,7 @@ class AngleAttr(ParametrizedAttribute):
     data: FloatData
 
     def __init__(self, f: float):
-        f_attr = FloatData(f % 2)
+        f_attr = FloatData(math.fmod(f, 2))
         super().__init__(f_attr)
 
     def as_float_raw(self) -> float:
@@ -65,18 +64,6 @@ class AngleAttr(ParametrizedAttribute):
             else:
                 printer.print_string(f"{f}pi")
 
-    def __add__(self, other: AngleAttr) -> AngleAttr:
-        return AngleAttr(self.data.data + other.data.data)
-
-    def __sub__(self, other: AngleAttr) -> AngleAttr:
-        return AngleAttr(self.data.data - other.data.data)
-
-    def __neg__(self) -> AngleAttr:
-        return AngleAttr(-self.data.data)
-
-    def __mul__(self, other: float):
-        return AngleAttr(self.data.data * other)
-
 
 @irdl_attr_definition
 class AngleType(ParametrizedAttribute, TypeAttribute):
@@ -88,7 +75,7 @@ class AngleType(ParametrizedAttribute, TypeAttribute):
 
 
 @irdl_op_definition
-class ConstantAngleOp(IRDLOperation, HasFolderInterface):
+class ConstantAngleOp(IRDLOperation):
     """
     Constant-like operation for producing angles
     """
@@ -110,9 +97,6 @@ class ConstantAngleOp(IRDLOperation, HasFolderInterface):
             },
             result_types=(AngleType(),),
         )
-
-    def fold(self) -> tuple[AngleAttr]:
-        return (self.angle,)
 
 
 Angle = Dialect(
