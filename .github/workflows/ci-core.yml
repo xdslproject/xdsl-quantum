@@ -38,6 +38,3 @@ jobs:
       - name: Run all tests
         run: |
           make tests-functional
-
-      - name: Prune uv cache
-        run: uv cache prune --ci
