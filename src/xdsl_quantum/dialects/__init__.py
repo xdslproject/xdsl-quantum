@@ -6,5 +6,9 @@ from xdsl.ir import Dialect
 def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
     """Returns all available dialects."""
 
-    # Add your dialects here to be discovered by `xdsl-opt`
-    return {}
+    def get_angle():
+        from xdsl_quantum.dialects.angle import Angle
+
+        return Angle
+
+    return {"angle": get_angle}
