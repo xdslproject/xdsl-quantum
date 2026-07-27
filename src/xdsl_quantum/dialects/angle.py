@@ -2,11 +2,19 @@ from __future__ import annotations
 
 from fractions import Fraction
 
-from xdsl.ir import Data, Dialect, ParametrizedAttribute, TypeAttribute
+from xdsl.ir import (
+    Data,
+    Dialect,
+    Operation,
+    ParametrizedAttribute,
+    SSAValue,
+    TypeAttribute,
+)
 from xdsl.irdl import (
     IRDLOperation,
     irdl_attr_definition,
     irdl_op_definition,
+    operand_def,
     prop_def,
     result_def,
     traits_def,
@@ -105,10 +113,31 @@ class ConstantAngleOp(IRDLOperation):
         )
 
 
+@irdl_op_definition
+class AddAngleOp(IRDLOperation):
+    """
+    Adds two angles.
+    """
+
+    name = "angle.add"
+
+    lhs = operand_def(AngleType)
+
+    rhs = operand_def(AngleType)
+
+    out = result_def(AngleType)
+
+    assembly_format = "$lhs `,` $rhs attr-dict"
+
+    def __init__(self, lhs: SSAValue | Operation, rhs: SSAValue | Operation):
+        super().__init__(operands=(lhs, rhs), result_types=(AngleType(),))
+
+
 Angle = Dialect(
     "angle",
     [
         ConstantAngleOp,
+        AddAngleOp,
     ],
     [
         AngleAttr,
