@@ -29,4 +29,4 @@ jobs:
           python-version: "3.14"
 
       - name: Run code formatting checks with prek
-        uses: j178/prek-action@v2
+        uses: j178/prek-action@v3.0.0
