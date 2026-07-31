@@ -11,4 +11,18 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
 
         return Angle
 
-    return {"angle": get_angle}
+    def get_gate():
+        from xdsl_quantum.dialects.gate import Gate
+
+        return Gate
+
+    def get_measure():
+        from xdsl_quantum.dialects.measure import Measure
+
+        return Measure
+
+    return {
+        "angle": get_angle,
+        "gate": get_gate,
+        "measure": get_measure,
+    }

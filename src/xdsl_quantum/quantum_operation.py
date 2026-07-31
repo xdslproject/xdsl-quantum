@@ -1,6 +1,24 @@
 from abc import ABC, abstractmethod
+from collections.abc import Mapping
+from dataclasses import dataclass
 
-from xdsl.ir import ParametrizedAttribute, TypeAttribute
+from typing_extensions import TypeVar
+from xdsl.ir import (
+    Attribute,
+    ParametrizedAttribute,
+    TypeAttribute,
+    field,
+)
+from xdsl.irdl import (
+    AnyAttr,
+    AnyInt,
+    AttrConstraint,
+    ConstraintContext,
+    IntConstraint,
+    RangeConstraint,
+    RangeOf,
+)
+from xdsl.utils.exceptions import VerifyException
 
 
 class QuantumOperationAttribute(ParametrizedAttribute, ABC):
@@ -28,6 +46,38 @@ class QuantumOperationAttribute(ParametrizedAttribute, ABC):
     @property
     @abstractmethod
     def num_qubits(self) -> int: ...
+
+
+@dataclass(frozen=True)
+class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
+    """Constrains the inputs and results of a QuantumOperationConstraint"""
+
+    in_constr: RangeConstraint = field(default=RangeOf(AnyAttr()))
+    out_constr: RangeConstraint = field(default=RangeOf(AnyAttr()))
+    qubit_constr: IntConstraint = field(default=AnyInt())
+
+    def verify(self, attr: Attribute, constraint_context: ConstraintContext) -> None:
+        if not isinstance(attr, QuantumOperationAttribute):
+            raise VerifyException(f"{attr} should be of type QuantumOperationAttribute")
+        self.in_constr.verify(attr.classical_inputs, constraint_context)
+        self.out_constr.verify(attr.classical_results, constraint_context)
+        self.qubit_constr.verify(attr.num_qubits, constraint_context)
+
+    def variables(self) -> set[str]:
+        return (
+            self.in_constr.variables()
+            | self.out_constr.variables()
+            | self.qubit_constr.variables()
+        )
+
+    def mapping_type_vars(
+        self, type_var_mapping: Mapping[TypeVar, AttrConstraint | IntConstraint]
+    ) -> AttrConstraint[QuantumOperationAttribute]:
+        return QuantumOperationConstraint(
+            self.in_constr.mapping_type_vars(type_var_mapping),
+            self.out_constr.mapping_type_vars(type_var_mapping),
+            self.qubit_constr.mapping_type_vars(type_var_mapping),
+        )
 
 
 class GateAttribute(QuantumOperationAttribute, ABC):
