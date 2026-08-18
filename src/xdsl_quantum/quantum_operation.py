@@ -1,8 +1,9 @@
 """Quantum gates and operations are likely to be shared between different dialects.
-Rather than creating a duplicate operation in each dialect, we encode each quantum
-operation as an attribute. The `QuantumOperationAttribute` generalises over gate
-operations and measurements, and specifies the number of classical inputs and outputs
-the operation has.
+Rather than creating a duplicate operation in each dialect, we encode these as
+attributes to be used by more generic operations. The `QuantumOperationAttribute`
+interface generalises over gate operations and measurements, and specifies the number of
+classical inputs and outputs the operation has, as well as (optionally) how many qubits
+it acts on.
 
 We consider all operations to be non-destructive, meaning they have the same number of
 input and output qubits, but ultimately the dialect can decide how these are used.
@@ -13,6 +14,7 @@ attribute, rather than being redefined for every dialect these gates are used in
 - Certain transformations may be able to act in an operation independent way, for
 instance translating from the 'qssa' to 'qref' dialect does not need any knowledge of
 which quantum operations are being performed.
+
 """
 
 from abc import ABC, abstractmethod
@@ -28,7 +30,7 @@ class QuantumOperationAttribute(ParametrizedAttribute, ABC):
     @property
     @abstractmethod
     def classical_inputs(self) -> tuple[TypeAttribute, ...]:
-        """The classical inputs or parameters to the operation."""
+        """The types of the classical inputs, given as a"""
 
     @property
     @abstractmethod
