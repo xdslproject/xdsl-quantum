@@ -7,7 +7,7 @@ the operation has.
 We consider all operations to be non-destructive, meaning they have the same number of
 input and output qubits, but ultimately the dialect can decide how these are used.
 
-The use of these attributes has two advantages:
+Generalising over quantum operations with attributes has two advantages:
 - Static properties of common gates and subprocedures can be encoded once on the
 attribute, rather than being redefined for every dialect these gates are used in.
 - Certain transformations may be able to act in an operation independent way, for
