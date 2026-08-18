@@ -33,7 +33,6 @@ from xdsl.irdl import (
     AttrConstraint,
     ConstraintContext,
     IntConstraint,
-    IRDLAttrConstraint,
     RangeConstraint,
     RangeOf,
     get_int_constraint,
@@ -76,20 +75,16 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
 
     @staticmethod
     def get(
-        in_constr: RangeConstraint | IRDLAttrConstraint | None = None,
-        out_constr: RangeConstraint | IRDLAttrConstraint | None = None,
+        in_constr: RangeConstraint | None = None,
+        out_constr: RangeConstraint | None = None,
         qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
     ) -> AttrConstraint[QuantumOperationAttribute]:
 
         if in_constr is None:
             in_constr = RangeOf(AnyAttr())
-        elif not isinstance(in_constr, RangeConstraint):
-            in_constr = RangeOf(in_constr)
 
         if out_constr is None:
             out_constr = RangeOf(AnyAttr())
-        elif not isinstance(out_constr, RangeConstraint):
-            out_constr = RangeOf(out_constr)
 
         if qubit_constr is None:
             qubit_constr = AnyInt()
