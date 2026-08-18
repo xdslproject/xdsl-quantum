@@ -27,15 +27,22 @@ class QuantumOperationAttribute(ParametrizedAttribute, ABC):
 
     @property
     @abstractmethod
-    def classical_inputs(self) -> tuple[TypeAttribute, ...]: ...
+    def classical_inputs(self) -> tuple[TypeAttribute, ...]:
+        """The classical inputs or parameters to the operation."""
 
     @property
     @abstractmethod
-    def classical_results(self) -> tuple[TypeAttribute, ...]: ...
+    def classical_results(self) -> tuple[TypeAttribute, ...]:
+        """The classical outcome space of running the operation."""
 
     @property
     @abstractmethod
-    def num_qubits(self) -> int: ...
+    def num_qubits(self) -> int | None:
+        """
+        How many qubits this operation acts on.
+        If the operation takes a variable or unknown number of qubits then this should
+        return None.
+        """
 
 
 class GateAttribute(QuantumOperationAttribute, ABC):
