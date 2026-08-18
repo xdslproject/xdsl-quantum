@@ -46,6 +46,9 @@ docs = [
 [tool.hatch]
 version.source = "vcs"
 
+[tool.uv]
+sources.xdsl = { git = "https://github.com/xdslproject/xdsl", branch = "kim/stim/port-to-xdsl-quantum" }
+
 [tool.ruff]
 # Support Python 3.10+.
 target-version = "py310"

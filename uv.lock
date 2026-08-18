@@ -355,7 +355,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -1063,16 +1063,12 @@ wheels = [
 
 [[package]]
 name = "xdsl"
-version = "0.69.0"
-source = { registry = "https://pypi.org/simple" }
+version = "0.69.1.dev47+g932821093"
+source = { git = "https://github.com/xdslproject/xdsl?branch=kim%2Fstim%2Fport-to-xdsl-quantum#93282109368cef6f053a46fe4a5c9b551bd841cd" }
 dependencies = [
     { name = "immutabledict" },
     { name = "ordered-set" },
     { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/44/33/f37e729d6563f87c964dd991807444a0aa50aaf8a7775210df164d4d796e/xdsl-0.69.0.tar.gz", hash = "sha256:cc365cc1c746bd5cbf07f348e6c99e2da85a814f75ee44a91cb9caa20ea3c166", size = 4253600, upload-time = "2026-07-21T12:19:51.427Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/46/82/49066e88c1005d302e33ac572fe654d7b1dce591b3461ffc273d76170730/xdsl-0.69.0-py3-none-any.whl", hash = "sha256:40445d6a63d8539ba9527ffea30e5c47138fd9fa19b5f2c4eae978b5450ce76b", size = 4512167, upload-time = "2026-07-21T12:19:49.476Z" },
 ]
 
 [[package]]
@@ -1098,7 +1094,7 @@ docs = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "xdsl", specifier = "~=0.69.0" }]
+requires-dist = [{ name = "xdsl", git = "https://github.com/xdslproject/xdsl?branch=kim%2Fstim%2Fport-to-xdsl-quantum" }]
 
 [package.metadata.requires-dev]
 dev = [
