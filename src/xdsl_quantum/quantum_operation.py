@@ -4,7 +4,7 @@ operation as an attribute. The `QuantumOperationAttribute` generalises over gate
 operations and measurements, and specifies the number of classical inputs and outputs
 the operation has.
 
-We consider all operations to be non destructive, i.e. they have the same number of
+We consider all operations to be non-destructive, meaning they have the same number of
 input and output qubits, but ultimately the dialect can decide how these are used.
 
 The use of these attributes has two advantages:
