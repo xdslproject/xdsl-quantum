@@ -81,11 +81,11 @@ reportUnnecessaryTypeIgnoreComment = true
 ini_options.addopts = [ "--durations=20", "--maxfail=5", "--import-mode=importlib" ]
 
 [tool.coverage]
+run.source = [ "src/" ]
 run.branch = true
 run.concurrency = [ "multiprocessing" ]
 run.parallel = true
 run.relative_files = true
-run.source = [ "src/" ]
 report.exclude_lines = [
   "assert_never",
   # Don't complain about missing debug-only code:

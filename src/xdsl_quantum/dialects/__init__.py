@@ -6,9 +6,14 @@ from xdsl.ir import Dialect
 def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
     """Returns all available dialects."""
 
-    def get_stabsim():
-        from xdsl_quantum.dialects.stabsim import StabSim
+    def get_angle():
+        from xdsl_quantum.dialects.angle import Angle
 
-        return StabSim
+        return Angle
 
-    return {"stabsim": get_stabsim}
+    def get_stim():
+        from xdsl_quantum.dialects.targets.stim import Stim
+
+        return Stim
+
+    return {"angle": get_angle, "stim": get_stim}
