@@ -18,8 +18,27 @@ which quantum operations are being performed.
 """
 
 from abc import ABC, abstractmethod
+from collections.abc import Mapping
+from dataclasses import dataclass
 
-from xdsl.ir import ParametrizedAttribute, TypeAttribute
+from typing_extensions import TypeForm, TypeVar
+from xdsl.ir import (
+    Attribute,
+    ParametrizedAttribute,
+    TypeAttribute,
+)
+from xdsl.irdl import (
+    AnyAttr,
+    AnyInt,
+    AttrConstraint,
+    ConstraintContext,
+    IntConstraint,
+    IRDLAttrConstraint,
+    RangeConstraint,
+    RangeOf,
+    get_int_constraint,
+)
+from xdsl.utils.exceptions import VerifyException
 
 
 class QuantumOperationAttribute(ParametrizedAttribute, ABC):
@@ -45,6 +64,69 @@ class QuantumOperationAttribute(ParametrizedAttribute, ABC):
         If the operation takes a variable or unknown number of qubits then this should
         return None.
         """
+
+
+@dataclass(frozen=True)
+class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
+    """Constrains the inputs and results of a QuantumOperationAttribute."""
+
+    in_constr: RangeConstraint
+    out_constr: RangeConstraint
+    qubit_constr: IntConstraint
+
+    @staticmethod
+    def get(
+        in_constr: RangeConstraint | IRDLAttrConstraint | None = None,
+        out_constr: RangeConstraint | IRDLAttrConstraint | None = None,
+        qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
+    ) -> AttrConstraint[QuantumOperationAttribute]:
+
+        if in_constr is None:
+            in_constr = RangeOf(AnyAttr())
+        elif not isinstance(in_constr, RangeConstraint):
+            in_constr = RangeOf(in_constr)
+
+        if out_constr is None:
+            out_constr = RangeOf(AnyAttr())
+        elif not isinstance(out_constr, RangeConstraint):
+            out_constr = RangeOf(out_constr)
+
+        if qubit_constr is None:
+            qubit_constr = AnyInt()
+        elif not isinstance(qubit_constr, IntConstraint):
+            qubit_constr = get_int_constraint(qubit_constr)
+
+        return QuantumOperationConstraint(in_constr, out_constr, qubit_constr)
+
+    @staticmethod
+    def gate(
+        qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
+    ) -> AttrConstraint[QuantumOperationAttribute]:
+        return QuantumOperationConstraint.get(
+            in_constr=RangeOf(AnyAttr()).of_length(0),
+            out_constr=RangeOf(AnyAttr()).of_length(0),
+            qubit_constr=qubit_constr,
+        )
+
+    def verify(self, attr: Attribute, constraint_context: ConstraintContext) -> None:
+        if not isinstance(attr, QuantumOperationAttribute):
+            raise VerifyException(f"{attr} should be a quantum operation")
+        self.in_constr.verify(attr.classical_inputs, constraint_context)
+        self.out_constr.verify(attr.classical_results, constraint_context)
+        if attr.num_qubits is not None:
+            self.qubit_constr.verify(attr.num_qubits, constraint_context)
+
+    def variables(self) -> set[str]:
+        return self.in_constr.variables() | self.out_constr.variables()
+
+    def mapping_type_vars(
+        self, type_var_mapping: Mapping[TypeVar, AttrConstraint | IntConstraint]
+    ) -> AttrConstraint[QuantumOperationAttribute]:
+        return QuantumOperationConstraint(
+            self.in_constr.mapping_type_vars(type_var_mapping),
+            self.out_constr.mapping_type_vars(type_var_mapping),
+            self.qubit_constr.mapping_type_vars(type_var_mapping),
+        )
 
 
 class GateAttribute(QuantumOperationAttribute, ABC):
