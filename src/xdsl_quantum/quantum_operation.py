@@ -33,7 +33,7 @@ class QuantumOperationAttribute(ParametrizedAttribute, ABC):
     @property
     @abstractmethod
     def classical_results(self) -> tuple[TypeAttribute, ...]:
-        """The classical outcome space of running the operation."""
+        """The classical outcomes of the operation."""
 
     @property
     @abstractmethod
