@@ -292,8 +292,8 @@ class TwoQubitGateOp(IRDLOperation, ABC):
     def verify_(self) -> None:
         if len(self.targets) % 2:
             raise VerifyException(
-                f"""Expected an even number of targets for {self.STIM_NAME},
-                    got {len(self.targets)}"""
+                f"Expected an even number of targets for {self.STIM_NAME}"
+                f", got {len(self.targets)}"
             )
 
 
