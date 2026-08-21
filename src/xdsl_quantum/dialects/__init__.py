@@ -11,4 +11,9 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
 
         return Angle
 
-    return {"angle": get_angle}
+    def get_stim():
+        from xdsl_quantum.dialects.targets.stim import Stim
+
+        return Stim
+
+    return {"angle": get_angle, "stim": get_stim}
