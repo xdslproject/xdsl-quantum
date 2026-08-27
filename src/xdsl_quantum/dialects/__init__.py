@@ -21,8 +21,4 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
 
         return Stim
 
-    return {
-        "angle": get_angle,
-        "pauli": get_pauli,
-        "stim": get_stim
-    }
+    return {"angle": get_angle, "pauli": get_pauli, "stim": get_stim}
