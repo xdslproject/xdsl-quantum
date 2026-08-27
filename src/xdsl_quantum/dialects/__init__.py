@@ -15,5 +15,14 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
         from xdsl_quantum.dialects.targets.stim import Stim
 
         return Stim
+      
+    def get_pauli():
+        from xdsl_quantum.dialects.pauli import Pauli
 
-    return {"angle": get_angle, "stim": get_stim}
+        return Pauli
+
+    return {
+        "angle": get_angle,
+        "pauli": get_pauli,
+        "stim": get_stim
+    }
