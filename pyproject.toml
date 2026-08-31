@@ -47,7 +47,7 @@ docs = [
 version.source = "vcs"
 
 [tool.uv]
-sources.xdsl = { git = "https://github.com/xdslproject/xdsl", branch = "kim/stim/port-to-xdsl-quantum" }
+sources.xdsl = { git = "https://github.com/xdslproject/xdsl" }
 
 [tool.ruff]
 # Support Python 3.10+.

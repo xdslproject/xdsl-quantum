@@ -20,7 +20,7 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
         from xdsl_quantum.dialects.targets.stim import Stim
 
         return Stim
-      
+
     def get_qu():
         from xdsl_quantum.dialects.qu import Qu
 
