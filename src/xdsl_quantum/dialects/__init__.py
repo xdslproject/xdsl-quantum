@@ -11,6 +11,11 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
 
         return Angle
 
+    def get_gate():
+        from xdsl_quantum.dialects.gate import Gate
+
+        return Gate
+
     def get_pauli():
         from xdsl_quantum.dialects.pauli import Pauli
 
@@ -28,6 +33,7 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
 
     return {
         "angle": get_angle,
+        "gate": get_gate,
         "pauli": get_pauli,
         "qssa": get_qssa,
         "qu": get_qu,
