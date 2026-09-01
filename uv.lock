@@ -361,11 +361,11 @@ wheels = [
 
 [[package]]
 name = "filecheck"
-version = "1.0.4"
+version = "1.0.5"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/9e/d8/13fb7e9a875204880597b9d9a3f5097337c3b0c3078ffc1ef67b16812a13/filecheck-1.0.4.tar.gz", hash = "sha256:108a74eb7d83a1eefe392e80c3281e98a3202365b748c7046a5809af0f6cd9d8", size = 20592, upload-time = "2026-08-30T16:11:23.689Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/54/2f/6d227124190b04b6a4c791818259f9ee1444e8cd446eae4dafae2c0bb228/filecheck-1.0.5.tar.gz", hash = "sha256:397eeb2c51f9d45bb31324925c797e77519eede8fb3d1b427db23fad27fff556", size = 20592, upload-time = "2026-08-31T13:55:07.876Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5c/db/c7c59782da143d9477d501eb8a7700c70074b545eb9758790e6ec782aaf5/filecheck-1.0.4-py3-none-any.whl", hash = "sha256:b20642fab9f1871b3d07c7a50e25d113ba8a9fd78110ebc9486007be55f0768c", size = 24653, upload-time = "2026-08-30T16:11:22.431Z" },
+    { url = "https://files.pythonhosted.org/packages/ae/67/0d5289cbeffccd2fbeab401a2ed84f32a2f867525dc141860def745a82bb/filecheck-1.0.5-py3-none-any.whl", hash = "sha256:933db648cc012bcef4c9dd356a70172e3356709962753b977cf5f330004422f3", size = 24665, upload-time = "2026-08-31T13:55:06.84Z" },
 ]
 
 [[package]]
@@ -1099,7 +1099,7 @@ requires-dist = [{ name = "xdsl", specifier = "~=0.70.0" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "filecheck", specifier = "==1.0.4" },
+    { name = "filecheck", specifier = "==1.0.5" },
     { name = "lit", specifier = "<24" },
     { name = "prek", specifier = "~=0.5.0" },
     { name = "psutil" },
