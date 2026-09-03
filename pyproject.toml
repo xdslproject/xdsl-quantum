@@ -30,7 +30,7 @@ entry-points."xdsl.universe".xdsl_quantum = "xdsl_quantum.universe:UNIVERSE"
 
 [dependency-groups]
 dev = [
-  "filecheck==1.0.5",
+  "filecheck==1.0.6",
   "lit<24",
   "prek~=0.5.0",
   "psutil",
