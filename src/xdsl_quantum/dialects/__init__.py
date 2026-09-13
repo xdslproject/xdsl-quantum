@@ -31,10 +31,16 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
 
         return Qu
 
+    def get_stim():
+        from xdsl_quantum.dialects.stim import Stim
+
+        return Stim
+
     return {
         "angle": get_angle,
         "gate": get_gate,
         "pauli": get_pauli,
         "qssa": get_qssa,
         "qu": get_qu,
+        "stim": get_stim,
     }
