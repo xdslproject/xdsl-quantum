@@ -31,10 +31,10 @@ from xdsl.irdl import (
     AnyAttr,
     AnyInt,
     AttrConstraint,
-    ConstraintContext,
     IntConstraint,
     RangeConstraint,
     RangeOf,
+    VerificationContext,
     get_int_constraint,
 )
 from xdsl.utils.exceptions import VerifyException
@@ -103,7 +103,7 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
             qubit_constr=qubit_constr,
         )
 
-    def verify(self, attr: Attribute, constraint_context: ConstraintContext) -> None:
+    def verify(self, attr: Attribute, constraint_context: VerificationContext) -> None:
         if not isinstance(attr, QuantumOperationAttribute):
             raise VerifyException(f"{attr} should be a quantum operation")
         self.in_constr.verify(attr.classical_inputs, constraint_context)

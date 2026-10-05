@@ -5,9 +5,9 @@ from xdsl.dialects.builtin import i1
 from xdsl.ir import TypeAttribute, VerifyException
 from xdsl.irdl import (
     AnyAttr,
-    ConstraintContext,
     RangeOf,
     RangeVarConstraint,
+    VerificationContext,
     irdl_attr_definition,
 )
 
@@ -49,20 +49,20 @@ def test_quantum_operation_constraint() -> None:
 
     assert not any_quantum_operation.can_infer(set())
     assert any_quantum_operation.variables() == set()
-    any_quantum_operation.verify(ExampleOperation(), ConstraintContext())
-    any_quantum_operation.verify(ExampleGate(), ConstraintContext())
+    any_quantum_operation.verify(ExampleOperation(), VerificationContext())
+    any_quantum_operation.verify(ExampleGate(), VerificationContext())
 
     with pytest.raises(VerifyException, match="i1 should be a quantum operation"):
-        any_quantum_operation.verify(i1, ConstraintContext())
+        any_quantum_operation.verify(i1, VerificationContext())
 
     gate_constr = QuantumOperationConstraint.gate()
 
     assert not gate_constr.can_infer(set())
     assert gate_constr.variables() == set()
-    gate_constr.verify(ExampleGate(), ConstraintContext())
+    gate_constr.verify(ExampleGate(), VerificationContext())
 
     with pytest.raises(VerifyException, match="Invalid value 2, expected 0"):
-        gate_constr.verify(ExampleOperation(), ConstraintContext())
+        gate_constr.verify(ExampleOperation(), VerificationContext())
 
     range_constraint = RangeVarConstraint("R", RangeOf(AnyAttr()))
     same_in_out_constr = QuantumOperationConstraint.get(
@@ -72,28 +72,28 @@ def test_quantum_operation_constraint() -> None:
     assert not same_in_out_constr.can_infer({"R"})
     assert same_in_out_constr.variables() == {"R"}
 
-    same_in_out_constr.verify(ExampleGate(), ConstraintContext())
+    same_in_out_constr.verify(ExampleGate(), VerificationContext())
     with pytest.raises(
         VerifyException,
         match=re.escape(
             "attributes ('i1', 'i1') expected from range variable 'R', but got ('i1',)"
         ),
     ):
-        same_in_out_constr.verify(ExampleOperation(), ConstraintContext())
+        same_in_out_constr.verify(ExampleOperation(), VerificationContext())
 
     one_qubit_constr = QuantumOperationConstraint.get(qubit_constr=1)
 
     assert not one_qubit_constr.can_infer(set())
     assert one_qubit_constr.variables() == set()
 
-    one_qubit_constr.verify(ExampleGate(), ConstraintContext())
+    one_qubit_constr.verify(ExampleGate(), VerificationContext())
 
     with pytest.raises(VerifyException, match="Invalid value 2, expected 1"):
-        one_qubit_constr.verify(ExampleOperation(), ConstraintContext())
+        one_qubit_constr.verify(ExampleOperation(), VerificationContext())
 
     two_qubit_constr = QuantumOperationConstraint.get(qubit_constr=2)
     assert not two_qubit_constr.can_infer(set())
     assert two_qubit_constr.variables() == set()
 
-    two_qubit_constr.verify(ExampleOperation(), ConstraintContext())
-    two_qubit_constr.verify(ExampleGate(), ConstraintContext())
+    two_qubit_constr.verify(ExampleOperation(), VerificationContext())
+    two_qubit_constr.verify(ExampleGate(), VerificationContext())
