@@ -21,6 +21,11 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
 
         return Pauli
 
+    def get_qir():
+        from xdsl_quantum.dialects.qir import QIR
+
+        return QIR
+
     def get_qssa():
         from xdsl_quantum.dialects.qssa import Qssa
 
@@ -40,6 +45,7 @@ def get_all_dialects() -> dict[str, Callable[[], Dialect]]:
         "angle": get_angle,
         "gate": get_gate,
         "pauli": get_pauli,
+        "qir": get_qir,
         "qssa": get_qssa,
         "qu": get_qu,
         "stim": get_stim,
