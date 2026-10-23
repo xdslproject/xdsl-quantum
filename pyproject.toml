@@ -11,10 +11,9 @@ authors = [
   { name = "Sasha Lopoukhine", email = "sasha@lopoukhine.com" },
   { name = "Alex Rice", email = "alexrice999@hotmail.co.uk" },
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
@@ -23,7 +22,9 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = [ "version" ]
-dependencies = [ "xdsl~=0.73.0" ]
+dependencies = [
+  "xdsl~=0.74.0",
+]
 urls."Issue Tracker" = "https://github.com/xdslproject/xdsl-quantum/issues"
 urls."Source Code" = "https://github.com/xdslproject/xdsl-quantum"
 urls.Homepage = "https://xdsl.dev/xdsl-quantum"
@@ -31,11 +32,11 @@ entry-points."xdsl.universe".xdsl_quantum = "xdsl_quantum.universe:UNIVERSE"
 
 [dependency-groups]
 dev = [
+  "basedpyright==1.40.2",
   "filecheck==1.0.6",
   "lit<24",
   "prek~=0.5.0",
   "psutil",
-  "pyright==1.1.414",
   "pytest>=8.3.4",
   "pytest-cov",
 ]
@@ -48,8 +49,8 @@ docs = [
 version.source = "vcs"
 
 [tool.ruff]
-# Support Python 3.10+.
-target-version = "py310"
+# Support Python 3.11+.
+target-version = "py311"
 src = [ "src/", "tests/" ]
 format.docstring-code-format = true
 lint.select = [ "E", "F", "I", "INP", "PT", "PYI", "TID251", "UP", "W" ]
