@@ -124,23 +124,30 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
         )
 
 
-class GateAttribute(QuantumOperationAttribute, ABC):
+class ParamGateAttribute(QuantumOperationAttribute, ABC):
     """
-    A quantum gate is an operation with no classical inputs or outputs
+    A quantum gate with no classical results.
+    May have classical inputs (e.g., for parameterized gates).
     """
-
-    @property
-    def classical_inputs(self) -> tuple[()]:
-        return ()
 
     @property
     def classical_results(self) -> tuple[()]:
         return ()
 
 
-class SingleQubitGateAttribute(GateAttribute, ABC):
+class GateAttribute(ParamGateAttribute, ABC):
     """
-    A quantum gate on a single qubit.
+    A quantum gate with no classical inputs or results.
+    """
+
+    @property
+    def classical_inputs(self) -> tuple[()]:
+        return ()
+
+
+class SingleQubit(QuantumOperationAttribute, ABC):
+    """
+    A quantum operation on a single qubit.
     """
 
     @property
@@ -148,9 +155,9 @@ class SingleQubitGateAttribute(GateAttribute, ABC):
         return 1
 
 
-class TwoQubitGateAttribute(GateAttribute, ABC):
+class TwoQubit(QuantumOperationAttribute, ABC):
     """
-    A quantum gate on two qubits.
+    A quantum operation on two qubits.
     """
 
     @property
