@@ -23,10 +23,8 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
-      - name: Set up Python 3.14
-        uses: actions/setup-python@v7
-        with:
-          python-version: "3.15"
+      - name: Set up Python
+        run: uv python install $(cat .python-version)
 
       - name: Run code formatting checks with prek
         uses: j178/prek-action@v3.1.0
