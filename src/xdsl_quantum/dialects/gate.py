@@ -3,7 +3,7 @@ from xdsl.irdl import irdl_attr_definition
 
 from xdsl_quantum.quantum_operation import (
     GateAttribute,
-    SingleQubitGateAttribute,
+    SingleQubit,
 )
 
 
@@ -21,17 +21,17 @@ class IdentityGate(GateAttribute):
 
 
 @irdl_attr_definition
-class HadamardGate(SingleQubitGateAttribute):
+class HadamardGate(SingleQubit, GateAttribute):
     name = "gate.h"
 
 
 @irdl_attr_definition
-class SGate(SingleQubitGateAttribute):
+class SGate(SingleQubit, GateAttribute):
     name = "gate.s"
 
 
 @irdl_attr_definition
-class TGate(SingleQubitGateAttribute):
+class TGate(SingleQubit, GateAttribute):
     name = "gate.t"
 
 
