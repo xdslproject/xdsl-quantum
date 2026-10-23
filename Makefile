@@ -63,15 +63,15 @@ pytest: uv-installed ## run pytest tests
 filecheck: uv-installed ## run filecheck tests
 	uv run lit $(LIT_OPTIONS) tests/filecheck
 
-.PHONY: pyright
-pyright: uv-installed ## run pyright
-	uv run pyright $(shell git diff --staged --name-only  -- '*.py')
+.PHONY: typecheck
+typecheck: uv-installed
+	uv run basedpyright $(shell git diff --staged --name-only  -- '*.py')
 
 .PHONY: tests-functional
 tests: pytest filecheck ## run functional tests
 
 .PHONY: tests
-tests: tests-functional pyright ## run all tests
+tests: tests-functional typecheck ## run all tests
 
 .PHONY: docs
 docs: uv-installed ## Build and serve documentation
