@@ -22,6 +22,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 
 from typing_extensions import TypeForm, TypeVar
+from xdsl.dialects.builtin import i1
 from xdsl.ir import (
     Attribute,
     ParametrizedAttribute,
@@ -142,6 +143,16 @@ class Static(QuantumOperationAttribute, ABC):
     @property
     def classical_inputs(self) -> tuple[()]:
         return ()
+
+
+class MeasurementAttribute(QuantumOperationAttribute, ABC):
+    """
+    A quantum operation with a single boolean output.
+    """
+
+    @property
+    def classical_results(self) -> tuple[TypeAttribute, ...]:
+        return (i1,)
 
 
 class SingleQubit(QuantumOperationAttribute, ABC):
