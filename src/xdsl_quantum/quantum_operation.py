@@ -28,12 +28,11 @@ from xdsl.ir import (
     TypeAttribute,
 )
 from xdsl.irdl import (
-    AnyAttr,
     AnyInt,
+    AnyRange,
     AttrConstraint,
     IntConstraint,
     RangeConstraint,
-    RangeOf,
     VerificationContext,
     get_int_constraint,
 )
@@ -81,10 +80,10 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
     ) -> AttrConstraint[QuantumOperationAttribute]:
 
         if in_constr is None:
-            in_constr = RangeOf(AnyAttr())
+            in_constr = AnyRange()
 
         if out_constr is None:
-            out_constr = RangeOf(AnyAttr())
+            out_constr = AnyRange()
 
         if qubit_constr is None:
             qubit_constr = AnyInt()
@@ -98,8 +97,8 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
         qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
     ) -> AttrConstraint[QuantumOperationAttribute]:
         return QuantumOperationConstraint.get(
-            in_constr=RangeOf(AnyAttr()).of_length(0),
-            out_constr=RangeOf(AnyAttr()).of_length(0),
+            in_constr=AnyRange().of_length(0),
+            out_constr=AnyRange().of_length(0),
             qubit_constr=qubit_constr,
         )
 
