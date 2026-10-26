@@ -2,13 +2,13 @@ from xdsl.ir import Dialect
 from xdsl.irdl import irdl_attr_definition
 
 from xdsl_quantum.quantum_operation import (
-    GateAttribute,
-    SingleQubitGateAttribute,
+    SingleQubit,
+    StaticGateAttribute,
 )
 
 
 @irdl_attr_definition
-class IdentityGate(GateAttribute):
+class IdentityGate(StaticGateAttribute):
     """
     An identity gate on an arbitrary number of qubits
     """
@@ -21,17 +21,17 @@ class IdentityGate(GateAttribute):
 
 
 @irdl_attr_definition
-class HadamardGate(SingleQubitGateAttribute):
+class HadamardGate(SingleQubit, StaticGateAttribute):
     name = "gate.h"
 
 
 @irdl_attr_definition
-class SGate(SingleQubitGateAttribute):
+class SGate(SingleQubit, StaticGateAttribute):
     name = "gate.s"
 
 
 @irdl_attr_definition
-class TGate(SingleQubitGateAttribute):
+class TGate(SingleQubit, StaticGateAttribute):
     name = "gate.t"
 
 

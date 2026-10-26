@@ -12,9 +12,9 @@ from xdsl.irdl import (
 )
 
 from xdsl_quantum.quantum_operation import (
-    GateAttribute,
     QuantumOperationAttribute,
     QuantumOperationConstraint,
+    StaticGateAttribute,
 )
 
 
@@ -36,7 +36,7 @@ class ExampleOperation(QuantumOperationAttribute):
 
 
 @irdl_attr_definition
-class ExampleGate(GateAttribute):
+class ExampleGate(StaticGateAttribute):
     name = "test.gate"
 
     @property
@@ -55,7 +55,7 @@ def test_quantum_operation_constraint() -> None:
     with pytest.raises(VerifyException, match="i1 should be a quantum operation"):
         any_quantum_operation.verify(i1, VerificationContext())
 
-    gate_constr = QuantumOperationConstraint.gate()
+    gate_constr = QuantumOperationConstraint.static_gate()
 
     assert not gate_constr.can_infer(set())
     assert gate_constr.variables() == set()

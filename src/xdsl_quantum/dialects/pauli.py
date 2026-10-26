@@ -1,21 +1,21 @@
 from xdsl.ir import Dialect
 from xdsl.irdl import irdl_attr_definition
 
-from xdsl_quantum.quantum_operation import SingleQubitGateAttribute
+from xdsl_quantum.quantum_operation import SingleQubit, StaticGateAttribute
 
 
 @irdl_attr_definition
-class XAttr(SingleQubitGateAttribute):
+class XAttr(SingleQubit, StaticGateAttribute):
     name = "pauli.x"
 
 
 @irdl_attr_definition
-class YAttr(SingleQubitGateAttribute):
+class YAttr(SingleQubit, StaticGateAttribute):
     name = "pauli.y"
 
 
 @irdl_attr_definition
-class ZAttr(SingleQubitGateAttribute):
+class ZAttr(SingleQubit, StaticGateAttribute):
     name = "pauli.z"
 
 
