@@ -94,7 +94,7 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
         return QuantumOperationConstraint(in_constr, out_constr, qubit_constr)
 
     @staticmethod
-    def gate(
+    def static_gate(
         qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
     ) -> AttrConstraint[QuantumOperationAttribute]:
         return QuantumOperationConstraint.get(
@@ -124,7 +124,7 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
         )
 
 
-class ParamGateAttribute(QuantumOperationAttribute, ABC):
+class GateAttribute(QuantumOperationAttribute, ABC):
     """
     A quantum gate with no classical results.
     May have classical inputs (e.g., for parameterized gates).
@@ -135,7 +135,7 @@ class ParamGateAttribute(QuantumOperationAttribute, ABC):
         return ()
 
 
-class GateAttribute(ParamGateAttribute, ABC):
+class StaticGateAttribute(GateAttribute, ABC):
     """
     A quantum gate with no classical inputs or results.
     """

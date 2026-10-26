@@ -25,7 +25,7 @@ class GateOp(IRDLOperation):
 
     _Q: ClassVar = IntVarConstraint("Q", AnyInt())
 
-    gate = prop_def(QuantumOperationConstraint.gate(_Q))
+    gate = prop_def(QuantumOperationConstraint.static_gate(_Q))
 
     in_qubits = var_operand_def(RangeOf(BitType()).of_length(_Q))
 
