@@ -1,7 +1,7 @@
 from xdsl.ir import Dialect
 from xdsl.irdl import irdl_attr_definition
 
-from xdsl_quantum.quantum_operation import StaticGateAttribute, SingleQubit
+from xdsl_quantum.quantum_operation import SingleQubit, StaticGateAttribute
 
 
 @irdl_attr_definition

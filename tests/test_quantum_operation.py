@@ -12,9 +12,9 @@ from xdsl.irdl import (
 )
 
 from xdsl_quantum.quantum_operation import (
-    StaticGateAttribute,
     QuantumOperationAttribute,
     QuantumOperationConstraint,
+    StaticGateAttribute,
 )
 
 
