@@ -12,9 +12,10 @@ from xdsl.irdl import (
 )
 
 from xdsl_quantum.quantum_operation import (
+    GateAttribute,
     QuantumOperationAttribute,
     QuantumOperationConstraint,
-    StaticGateAttribute,
+    Static,
 )
 
 
@@ -36,7 +37,7 @@ class ExampleOperation(QuantumOperationAttribute):
 
 
 @irdl_attr_definition
-class ExampleGate(StaticGateAttribute):
+class ExampleGate(GateAttribute, Static):
     name = "test.gate"
 
     @property
