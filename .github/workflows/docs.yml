@@ -2,9 +2,10 @@ name: docs
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # Disabled until zenzical migration
+  # push:
+  #   branches:
+  #     - main
 
 permissions:
   contents: write
