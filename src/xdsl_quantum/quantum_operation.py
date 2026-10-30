@@ -134,9 +134,9 @@ class GateAttribute(QuantumOperationAttribute, ABC):
         return ()
 
 
-class StaticGateAttribute(GateAttribute, ABC):
+class Static(QuantumOperationAttribute, ABC):
     """
-    A quantum gate with no classical inputs or results.
+    A quantum operation with no classical inputs.
     """
 
     @property
