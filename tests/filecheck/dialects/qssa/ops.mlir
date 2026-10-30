@@ -16,3 +16,7 @@
 // CHECK-NEXT: %q0_3, %q1_1 = qssa.gate<#gate.id> %q0_2, %q1
 // CHECK-GENERIC-NEXT: %q0_3, %q1_1 = "qssa.gate"(%q0_2, %q1) <{gate = #gate.id}> : (!qu.bit, !qu.bit) -> (!qu.bit, !qu.bit)
 %q0_3, %q1_1 = qssa.gate<#gate.id> %q0_2, %q1
+
+// CHECK-NEXT: %q0_4, %q1_2 = qssa.gate<#gate.control<#pauli.x>> %q0_3, %q1_1
+// CHECK-GENERIC-NEXT: %q0_4, %q1_2 = "qssa.gate"(%q0_3, %q1_1) <{gate = #gate.control<#pauli.x>}> : (!qu.bit, !qu.bit) -> (!qu.bit, !qu.bit)
+%q0_4, %q1_2 = qssa.gate<#gate.control<#pauli.x>> %q0_3, %q1_1
