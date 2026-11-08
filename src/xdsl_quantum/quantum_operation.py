@@ -94,6 +94,17 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
         return QuantumOperationConstraint(in_constr, out_constr, qubit_constr)
 
     @staticmethod
+    def gate(
+        params: RangeConstraint | None = None,
+        qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
+    ) -> AttrConstraint[QuantumOperationAttribute]:
+        return QuantumOperationConstraint.get(
+            in_constr=params,
+            out_constr=AnyRange().of_length(0),
+            qubit_constr=qubit_constr,
+        )
+
+    @staticmethod
     def static_gate(
         qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
     ) -> AttrConstraint[QuantumOperationAttribute]:

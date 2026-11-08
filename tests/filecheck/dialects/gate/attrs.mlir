@@ -8,3 +8,12 @@
 
 // CHECK: "test.op"() {gate = #gate.t} : () -> ()
 "test.op"() {gate = #gate.t} : () -> ()
+
+// CHECK: "test.op"() {gate = #gate.rx} : () -> ()
+"test.op"() {gate = #gate.rx} : () -> ()
+
+// CHECK: "test.op"() {gate = #gate.ry} : () -> ()
+"test.op"() {gate = #gate.ry} : () -> ()
+
+// CHECK: "test.op"() {gate = #gate.rz} : () -> ()
+"test.op"() {gate = #gate.rz} : () -> ()
