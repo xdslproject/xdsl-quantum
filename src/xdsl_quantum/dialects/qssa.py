@@ -33,9 +33,9 @@ class GateOp(IRDLOperation):
 
     params = var_operand_def(_P)
 
-    in_qubits = var_operand_def(RangeOf(BitType()).of_length(_Q))
+    in_qubits = var_operand_def(RangeOf.get(BitType()).of_length(_Q))
 
-    out_qubits = var_result_def(RangeOf(BitType()).of_length(_Q))
+    out_qubits = var_result_def(RangeOf.get(BitType()).of_length(_Q))
 
     assembly_format = "`<` $gate `>` (`` `[` $params^ `]`)? $in_qubits attr-dict"
 
