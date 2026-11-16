@@ -17,6 +17,9 @@
 // CHECK-GENERIC-NEXT: %q0_3, %q1_1 = "qssa.gate"(%q0_2, %q1) <{gate = #gate.id, operandSegmentSizes = array<i32: 0, 2>}> : (!qu.bit, !qu.bit) -> (!qu.bit, !qu.bit)
 %q0_3, %q1_1 = qssa.gate<#gate.id> %q0_2, %q1
 
+// CHECK-NEXT: %q0_4, %q1_2 = qssa.gate<#gate.control<#pauli.x>> %q0_3, %q1_1
+// CHECK-GENERIC-NEXT: %q0_4, %q1_2 = "qssa.gate"(%q0_3, %q1_1) <{gate = #gate.control<#pauli.x>, operandSegmentSizes = array<i32: 0, 2>}> : (!qu.bit, !qu.bit) -> (!qu.bit, !qu.bit)
+%q0_4, %q1_2 = qssa.gate<#gate.control<#pauli.x>> %q0_3, %q1_1
 // Test rotation gates with angle parameters
 // CHECK: %angle = "test.op"() : () -> !angle.type
 %angle = "test.op"() : () -> !angle.type

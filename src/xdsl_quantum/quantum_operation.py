@@ -33,6 +33,7 @@ from xdsl.irdl import (
     AnyRange,
     AttrConstraint,
     IntConstraint,
+    MessageConstraint,
     RangeConstraint,
     VerificationContext,
     get_int_constraint,
@@ -98,10 +99,13 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
         params: RangeConstraint | None = None,
         qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
     ) -> AttrConstraint[QuantumOperationAttribute]:
-        return QuantumOperationConstraint.get(
-            in_constr=params,
-            out_constr=AnyRange().of_length(0),
-            qubit_constr=qubit_constr,
+        return MessageConstraint(
+            QuantumOperationConstraint.get(
+                in_constr=params,
+                out_constr=AnyRange().of_length(0),
+                qubit_constr=qubit_constr,
+            ),
+            "Expected gate with no classical outputs",
         )
 
     @staticmethod
