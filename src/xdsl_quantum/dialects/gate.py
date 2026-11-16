@@ -5,7 +5,7 @@ from xdsl.irdl import irdl_attr_definition, param_def
 from xdsl.parser import AttrParser
 from xdsl.printer import Printer
 
-from xdsl_quantum.dialects.angle import AngleType
+from xdsl_quantum.dialects.angle.attrs import AngleType
 from xdsl_quantum.quantum_operation import (
     GateAttribute,
     QuantumOperationAttribute,
