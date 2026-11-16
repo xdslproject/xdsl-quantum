@@ -1,7 +1,7 @@
 from abc import ABC
 
 from xdsl.ir import Attribute, Dialect, TypeAttribute
-from xdsl.irdl import AnyRange, irdl_attr_definition, param_def
+from xdsl.irdl import irdl_attr_definition, param_def
 from xdsl.parser import AttrParser
 from xdsl.printer import Printer
 
@@ -51,9 +51,7 @@ class ControlGate(GateAttribute):
 
     name = "gate.control"
 
-    inner: QuantumOperationAttribute = param_def(
-        QuantumOperationConstraint.gate()
-    )
+    inner: QuantumOperationAttribute = param_def(QuantumOperationConstraint.gate())
 
     @property
     def classical_inputs(self) -> tuple[TypeAttribute, ...]:
