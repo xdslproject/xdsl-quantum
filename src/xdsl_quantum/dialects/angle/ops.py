@@ -20,7 +20,7 @@ from .attrs import AngleAttr, AngleType
 @irdl_op_definition
 class ConstantAngleOp(IRDLOperation, HasFolderInterface):
     """
-    Constant-like operation for producing angles
+    Constant-like operation for producing angles.
     """
 
     name = "angle.constant"
