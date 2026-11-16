@@ -66,6 +66,74 @@
 
 // -----
 
+// Test that two opaque operands are not swapped
+// CHECK: %[[a:.*]] = "test.op"
+%a = "test.op"() : () -> !angle.type
+// CHECK: %[[b:.*]] = "test.op"
+%b = "test.op"() : () -> !angle.type
+
+// CHECK: angle.add %[[a]], %[[b]]
+%add = angle.add %a, %b
+
+"test.op"(%add) : (!angle.type) -> ()
+
+// -----
+
+// CHECK: %[[a:.*]] = angle.constant
+%a = angle.constant<0.5pi>
+// CHECK: %[[b:.*]] = "test.op"
+%b = "test.op"() : () -> !angle.type
+
+// CHECK: angle.add %[[b]], %[[a]]
+%add = angle.add %a, %b
+
+"test.op"(%add) : (!angle.type) -> ()
+
+// -----
+
+// CHECK: %[[a:.*]], %[[b:.*]], %[[c:.*]] = "test.op"
+%a, %b, %c = "test.op"() : () -> (!angle.type, !angle.type, !angle.type)
+
+%add_lhs = angle.add %a, %b
+
+// CHECK: %[[d:.*]] = angle.add %[[b]], %[[c]]
+// CHECK: angle.add %[[a]], %[[d]]
+%add = angle.add %add_lhs, %c
+
+"test.op"(%add) : (!angle.type) -> ()
+
+// -----
+
+// CHECK: %[[a:.*]], %[[c:.*]] = "test.op"
+%a, %c = "test.op"() : () -> (!angle.type, !angle.type)
+// CHECK: %[[b:.*]] = angle.constant
+%b = angle.constant<pi>
+
+%add_lhs = angle.add %a, %b
+
+// CHECK: %[[d:.*]] = angle.add %[[c]], %[[b]]
+// CHECK: angle.add %[[a]], %[[d]]
+%add = angle.add %add_lhs, %c
+
+"test.op"(%add) : (!angle.type) -> ()
+
+// -----
+
+// CHECK: %[[a:.*]] = angle.constant
+%a = angle.constant<pi>
+// CHECK: %[[b:.*]], %[[c:.*]] = "test.op"
+%b, %c = "test.op"() : () -> (!angle.type, !angle.type)
+
+%add_lhs = angle.add %a, %b
+
+// CHECK: %[[d:.*]] = angle.add %[[c]], %[[a]]
+// CHECK: angle.add %[[b]], %[[d]]
+%add = angle.add %add_lhs, %c
+
+"test.op"(%add) : (!angle.type) -> ()
+
+// -----
+
 %a = "test.op"() : () -> !angle.type
 
 // CHECK: angle.scalar_mult 2.500000e-01, %{{.*}}
