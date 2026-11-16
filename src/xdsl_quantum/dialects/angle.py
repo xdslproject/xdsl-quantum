@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from fractions import Fraction
-
 from xdsl.ir import (
     Data,
     Dialect,
@@ -25,58 +23,41 @@ from xdsl.traits import ConstantLike, Pure
 
 
 @irdl_attr_definition
-class AngleAttr(Data[Fraction]):
+class AngleAttr(Data[float]):
     """
-    Attribute that stores an angle as as a multiple of pi in the range [-1, 1)
+    Attribute that stores an angle as a float multiple of pi in the range [-1, 1)
     """
 
     name = "angle.attr"
 
-    def __init__(self, fraction: Fraction):
+    def __init__(self, value: float):
         # Normalize to [-1, 1)
-        fraction = (fraction + 1) % 2 - 1
-        super().__init__(fraction)
+        value = (value + 1) % 2 - 1
+        super().__init__(value)
 
     @classmethod
-    def parse_parameter(cls, parser: AttrParser) -> Fraction:
+    def parse_parameter(cls, parser: AttrParser) -> float:
         with parser.in_angle_brackets():
             is_negative = parser.parse_optional_punctuation("-") is not None
-            numerator = parser.parse_optional_integer(
-                allow_negative=False, allow_boolean=False
-            )
-            if numerator is None:
-                numerator = 1
+            value = parser.parse_optional_number()
+            if value is None:
+                value = 1.0
             if is_negative:
-                numerator *= -1
-            if numerator == 0:
-                parser.parse_optional_keyword("pi")
-            else:
-                parser.parse_keyword("pi")
-            if parser.parse_optional_punctuation("/"):
-                denominator = parser.parse_integer(
-                    allow_negative=False, allow_boolean=False
-                )
-            else:
-                denominator = 1
-            fraction = Fraction(numerator, denominator)
-            return (fraction + 1) % 2 - 1
+                value = -value
+            parser.parse_keyword("pi")
+            return (value + 1) % 2 - 1
 
     def print_parameter(self, printer: Printer) -> None:
         with printer.in_angle_brackets():
-            match self.data.numerator:
+            match self.data:
                 case 0:
-                    printer.print_string("0")
-                    return
+                    printer.print_string("0pi")
                 case 1:
-                    pass
+                    printer.print_string("pi")
                 case -1:
-                    printer.print_string("-")
+                    printer.print_string("-pi")
                 case i:
-                    printer.print_int(i)
-            printer.print_string("pi")
-            if (d := self.data.denominator) != 1:
-                printer.print_string("/")
-                printer.print_int(d)
+                    printer.print_string(f"{i:g}pi")
 
 
 @irdl_attr_definition

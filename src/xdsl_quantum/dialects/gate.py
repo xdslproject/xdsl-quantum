@@ -2,7 +2,9 @@ from xdsl.ir import Attribute, Dialect, TypeAttribute
 from xdsl.irdl import AnyRange, irdl_attr_definition, param_def
 from xdsl.parser import AttrParser
 from xdsl.printer import Printer
+from abc import ABC
 
+from xdsl_quantum.dialects.angle import AngleType
 from xdsl_quantum.quantum_operation import (
     GateAttribute,
     QuantumOperationAttribute,
@@ -71,6 +73,41 @@ class ControlGate(GateAttribute):
     def print_parameters(self, printer: Printer) -> None:
         with printer.in_angle_brackets():
             printer.print_attribute(self.inner)
+class RotationGate(GateAttribute, SingleQubit, ABC):
+    """
+    Base class for single-qubit rotation gates parameterized by an angle.
+    """
+
+    @property
+    def classical_inputs(self) -> tuple[AngleType, ...]:
+        return (AngleType(),)
+
+
+@irdl_attr_definition
+class RXGate(RotationGate):
+    """
+    X-rotation gate parameterized by an angle.
+    """
+
+    name = "gate.rx"
+
+
+@irdl_attr_definition
+class RYGate(RotationGate):
+    """
+    Y-rotation gate parameterized by an angle.
+    """
+
+    name = "gate.ry"
+
+
+@irdl_attr_definition
+class RZGate(RotationGate):
+    """
+    Z-rotation gate parameterized by an angle.
+    """
+
+    name = "gate.rz"
 
 
 Gate = Dialect(
@@ -82,5 +119,8 @@ Gate = Dialect(
         SGate,
         TGate,
         ControlGate,
+        RXGate,
+        RYGate,
+        RZGate,
     ],
 )

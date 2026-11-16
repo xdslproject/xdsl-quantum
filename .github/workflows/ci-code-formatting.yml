@@ -27,4 +27,4 @@ jobs:
         run: uv python install $(cat .python-version)
 
       - name: Run code formatting checks with prek
-        uses: j178/prek-action@v3.1.0
+        uses: j178/prek-action@v3.1.1
