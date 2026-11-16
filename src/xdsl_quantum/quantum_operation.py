@@ -50,7 +50,7 @@ class QuantumOperationAttribute(ParametrizedAttribute, ABC):
     def classical_inputs(self) -> tuple[TypeAttribute, ...]:
         """
         The types of the classical inputs of the operation. If the operation
-        takes no inputs this should return ().
+        takes no inputs this should return `()`.
         """
 
     @property
@@ -58,7 +58,7 @@ class QuantumOperationAttribute(ParametrizedAttribute, ABC):
     def classical_results(self) -> tuple[TypeAttribute, ...]:
         """
         The types of the classical results of the operation. If the operation
-        takes no inputs this should return ().
+        takes no inputs this should return `()`.
         """
 
     @property

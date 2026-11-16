@@ -11,7 +11,7 @@ from xdsl_quantum.quantum_operation import (
 @irdl_attr_definition
 class XMeasure(MeasurementAttribute, SingleQubit, Static):
     """
-    X basis measurement
+    X basis measurement.
     """
 
     name = "measure.x"
@@ -20,7 +20,7 @@ class XMeasure(MeasurementAttribute, SingleQubit, Static):
 @irdl_attr_definition
 class YMeasure(MeasurementAttribute, SingleQubit, Static):
     """
-    Y basis measurement
+    Y basis measurement.
     """
 
     name = "measure.y"
@@ -29,7 +29,7 @@ class YMeasure(MeasurementAttribute, SingleQubit, Static):
 @irdl_attr_definition
 class ZMeasure(MeasurementAttribute, SingleQubit, Static):
     """
-    Z basis measurement
+    Z basis measurement.
     """
 
     name = "measure.z"

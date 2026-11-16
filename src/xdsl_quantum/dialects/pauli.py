@@ -7,7 +7,7 @@ from xdsl_quantum.quantum_operation import GateAttribute, SingleQubit, Static
 @irdl_attr_definition
 class XAttr(GateAttribute, SingleQubit, Static):
     """
-    Pauli X gate
+    Pauli X gate.
     """
 
     name = "pauli.x"
@@ -16,7 +16,7 @@ class XAttr(GateAttribute, SingleQubit, Static):
 @irdl_attr_definition
 class YAttr(GateAttribute, SingleQubit, Static):
     """
-    Pauli Y gate
+    Pauli Y gate.
     """
 
     name = "pauli.y"
@@ -25,7 +25,7 @@ class YAttr(GateAttribute, SingleQubit, Static):
 @irdl_attr_definition
 class ZAttr(GateAttribute, SingleQubit, Static):
     """
-    Pauli Z gate
+    Pauli Z gate.
     """
 
     name = "pauli.z"
