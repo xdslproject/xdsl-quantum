@@ -1,8 +1,9 @@
+from abc import ABC
+
 from xdsl.ir import Attribute, Dialect, TypeAttribute
 from xdsl.irdl import AnyRange, irdl_attr_definition, param_def
 from xdsl.parser import AttrParser
 from xdsl.printer import Printer
-from abc import ABC
 
 from xdsl_quantum.dialects.angle import AngleType
 from xdsl_quantum.quantum_operation import (
@@ -73,6 +74,8 @@ class ControlGate(GateAttribute):
     def print_parameters(self, printer: Printer) -> None:
         with printer.in_angle_brackets():
             printer.print_attribute(self.inner)
+
+
 class RotationGate(GateAttribute, SingleQubit, ABC):
     """
     Base class for single-qubit rotation gates parameterized by an angle.
