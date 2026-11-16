@@ -24,6 +24,12 @@ from xdsl_quantum.quantum_operation import (
 
 @irdl_op_definition
 class GateOp(IRDLOperation):
+    """
+    QSSA Gate Operation.
+    This operation takes optional classical inputs and returns no classical outputs.
+    As it is a QSSA operation, the number of input and output qubits must be equal.
+    """
+
     name = "qssa.gate"
 
     _P: ClassVar = RangeVarConstraint("P", AnyRange())

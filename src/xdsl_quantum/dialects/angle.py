@@ -25,7 +25,7 @@ from xdsl.traits import ConstantLike, Pure
 @irdl_attr_definition
 class AngleAttr(Data[float]):
     """
-    Attribute that stores an angle as a float multiple of pi in the range [-1, 1)
+    Attribute that stores an angle as a float multiple of pi in the range [-1, 1).
     """
 
     name = "angle.attr"
@@ -72,7 +72,7 @@ class AngleType(ParametrizedAttribute, TypeAttribute):
 @irdl_op_definition
 class ConstantAngleOp(IRDLOperation):
     """
-    Constant-like operation for producing angles
+    Constant-like operation for producing angles.
     """
 
     name = "angle.constant"

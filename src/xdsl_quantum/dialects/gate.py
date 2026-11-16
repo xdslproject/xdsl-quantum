@@ -14,7 +14,7 @@ from xdsl_quantum.quantum_operation import (
 @irdl_attr_definition
 class IdentityGate(GateAttribute, Static):
     """
-    An identity gate on an arbitrary number of qubits
+    An identity gate on an arbitrary number of qubits.
     """
 
     name = "gate.id"
