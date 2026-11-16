@@ -52,7 +52,7 @@ class ControlGate(GateAttribute):
     name = "gate.control"
 
     inner: QuantumOperationAttribute = param_def(
-        QuantumOperationConstraint.get(out_constr=AnyRange().of_length(0))
+        QuantumOperationConstraint.gate()
     )
 
     @property
