@@ -54,9 +54,6 @@ class QifOp(IRDLOperation):
 
     traits = traits_def(
         SingleBlockImplicitTerminator(QscfYieldOp),
-        # RecursiveMemoryEffect(),
-        # RecursivelySpeculatable(),
-        # IfOpHasCanonicalizationPatternsTrait(),
     )
 
     def __init__(
