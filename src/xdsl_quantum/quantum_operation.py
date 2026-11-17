@@ -124,6 +124,20 @@ class QuantumOperationConstraint(AttrConstraint[QuantumOperationAttribute]):
             qubit_constr=qubit_constr,
         )
 
+    @staticmethod
+    def measurement(
+        params: RangeConstraint | None = None,
+        qubit_constr: int | TypeForm[int] | IntConstraint | None = None,
+    ) -> AttrConstraint[QuantumOperationAttribute]:
+        return MessageConstraint(
+            QuantumOperationConstraint.get(
+                in_constr=params,
+                out_constr=AnyRange().of_length(1),
+                qubit_constr=qubit_constr,
+            ),
+            "Expected measurement with a single classical output",
+        )
+
     def verify(self, attr: Attribute, constraint_context: VerificationContext) -> None:
         if not isinstance(attr, QuantumOperationAttribute):
             raise VerifyException(f"{attr} should be a quantum operation")
