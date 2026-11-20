@@ -36,3 +36,23 @@
 %mult = angle.scalar_mult 0.5, %a
 
 "test.op"(%mult) : (!angle.type) -> ()
+
+// -----
+
+%a = "test.op"() : () -> !angle.type
+
+// CHECK: angle.scalar_mult 2.500000e-01, %{{.*}}
+%inner = angle.scalar_mult 0.5, %a
+%outer = angle.scalar_mult 0.5, %inner
+
+"test.op"(%outer) : (!angle.type) -> ()
+
+// -----
+
+%a = "test.op"() : () -> !angle.type
+
+// CHECK-NOT: angle.scalar_mult
+%inner = angle.scalar_mult 0.5, %a
+%outer = angle.scalar_mult 2.0, %inner
+
+"test.op"(%outer) : (!angle.type) -> ()

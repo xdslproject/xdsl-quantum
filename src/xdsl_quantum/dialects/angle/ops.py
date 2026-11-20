@@ -1,7 +1,7 @@
 from collections.abc import Sequence
 
 from xdsl.dialects.builtin import Float64Type, FloatAttr
-from xdsl.interfaces import HasFolderInterface
+from xdsl.interfaces import HasCanonicalizationPatternsInterface, HasFolderInterface
 from xdsl.ir import Attribute, Operation, SSAValue
 from xdsl.irdl import (
     IRDLOperation,
@@ -11,6 +11,7 @@ from xdsl.irdl import (
     result_def,
     traits_def,
 )
+from xdsl.pattern_rewriter import RewritePattern
 from xdsl.traits import ConstantLike, Pure
 
 from .attrs import AngleAttr, AngleType
@@ -71,7 +72,9 @@ class AddAngleOp(IRDLOperation, HasFolderInterface):
 
 
 @irdl_op_definition
-class ScalarMultOp(IRDLOperation, HasFolderInterface):
+class ScalarMultOp(
+    IRDLOperation, HasFolderInterface, HasCanonicalizationPatternsInterface
+):
     """
     Scalar multiplication operation.
     Multiplies an angle by a scalar float value.
@@ -95,6 +98,12 @@ class ScalarMultOp(IRDLOperation, HasFolderInterface):
             properties={"scalar": scalar},
             result_types=[AngleType()],
         )
+
+    @classmethod
+    def get_canonicalization_patterns(cls) -> tuple[RewritePattern, ...]:
+        from .canonicalize import ScalarMultCombinePattern
+
+        return (ScalarMultCombinePattern(),)
 
     def fold(self) -> Sequence[SSAValue | Attribute] | None:
         scalar_value = self.scalar.value.data
