@@ -68,7 +68,7 @@ typecheck: uv-installed
 	uv run basedpyright $(shell git diff --staged --name-only  -- '*.py')
 
 .PHONY: tests-functional
-tests: pytest filecheck ## run functional tests
+tests-functional: pytest filecheck ## run functional tests
 
 .PHONY: tests
 tests: tests-functional typecheck ## run all tests
