@@ -46,7 +46,9 @@ class ConstantAngleOp(IRDLOperation, HasFolderInterface):
 
 
 @irdl_op_definition
-class AddAngleOp(IRDLOperation, HasFolderInterface):
+class AddAngleOp(
+    IRDLOperation, HasFolderInterface, HasCanonicalizationPatternsInterface
+):
     """
     Adds two angles.
     """
@@ -63,6 +65,12 @@ class AddAngleOp(IRDLOperation, HasFolderInterface):
 
     def __init__(self, lhs: SSAValue | Operation, rhs: SSAValue | Operation):
         super().__init__(operands=(lhs, rhs), result_types=(AngleType(),))
+
+    @classmethod
+    def get_canonicalization_patterns(cls) -> tuple[RewritePattern, ...]:
+        from .canonicalize import AddAssocPattern, AddCommutativePattern
+
+        return (AddCommutativePattern(), AddAssocPattern())
 
     def fold(self) -> Sequence[SSAValue | Attribute] | None:
         lhs = ConstantLike.get_constant_value(self.lhs)
