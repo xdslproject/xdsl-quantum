@@ -67,6 +67,10 @@ class AddAngleOp(IRDLOperation, HasFolderInterface):
     def fold(self) -> Sequence[SSAValue | Attribute] | None:
         lhs = ConstantLike.get_constant_value(self.lhs)
         rhs = ConstantLike.get_constant_value(self.rhs)
+        if lhs == AngleAttr(0):
+            return (self.rhs,)
+        if rhs == AngleAttr(0):
+            return (self.lhs,)
         if isinstance(lhs, AngleAttr) and isinstance(rhs, AngleAttr):
             return (lhs + rhs,)
 
