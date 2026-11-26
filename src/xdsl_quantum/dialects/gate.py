@@ -1,5 +1,6 @@
 from abc import ABC
 
+from xdsl.dialects.builtin import i1
 from xdsl.ir import Attribute, Dialect, TypeAttribute
 from xdsl.irdl import irdl_attr_definition, param_def
 from xdsl.parser import AttrParser
@@ -74,6 +75,34 @@ class ControlGate(GateAttribute):
             printer.print_attribute(self.inner)
 
 
+@irdl_attr_definition
+class ConditionedGate(GateAttribute):
+    """
+    Creates the "classically conditioned" version of a (possibly parametrized) gate.
+    """
+
+    name = "gate.cond"
+
+    inner: QuantumOperationAttribute = param_def(QuantumOperationConstraint.gate())
+
+    @property
+    def classical_inputs(self) -> tuple[TypeAttribute, ...]:
+        return (i1,) + self.inner.classical_inputs
+
+    @property
+    def num_qubits(self) -> int | None:
+        return self.inner.num_qubits
+
+    @classmethod
+    def parse_parameters(cls, parser: AttrParser) -> tuple[Attribute]:
+        with parser.in_angle_brackets():
+            return (parser.parse_attribute(),)
+
+    def print_parameters(self, printer: Printer) -> None:
+        with printer.in_angle_brackets():
+            printer.print_attribute(self.inner)
+
+
 class RotationGate(GateAttribute, SingleQubit, ABC):
     """
     Base class for single-qubit rotation gates parameterized by an angle.
@@ -120,6 +149,7 @@ Gate = Dialect(
         SGate,
         TGate,
         ControlGate,
+        ConditionedGate,
         RXGate,
         RYGate,
         RZGate,
