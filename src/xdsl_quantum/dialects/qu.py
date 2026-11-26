@@ -11,10 +11,20 @@ class BitType(ParametrizedAttribute, TypeAttribute):
     name = "qu.bit"
 
 
+@irdl_attr_definition
+class RefType(ParametrizedAttribute, TypeAttribute):
+    """
+    Reference to a qubit
+    """
+
+    name = "qu.ref"
+
+
 Qu = Dialect(
     "qu",
     [],
     [
         BitType,
+        RefType,
     ],
 )
