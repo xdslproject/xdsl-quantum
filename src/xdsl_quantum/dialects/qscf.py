@@ -15,7 +15,7 @@ from xdsl.parser import Parser
 from xdsl.printer import Printer
 from xdsl.traits import NoTerminator
 
-from xdsl_quantum.dialects.qu import BitType
+from xdsl_quantum.dialects.qu import RefType
 
 
 class QifLikeOp(IRDLOperation, ABC):
@@ -57,7 +57,7 @@ class QifOp(QifLikeOp):
 
     name = "qscf.qif"
 
-    cond = operand_def(BitType)
+    cond = operand_def(RefType)
 
     traits = traits_def(NoTerminator())
 
@@ -81,7 +81,7 @@ class QifOp(QifLikeOp):
 
     @classmethod
     def parse(cls, parser: Parser) -> Self:
-        cond = parser.parse_operand(BitType())
+        cond = parser.parse_operand(RefType())
         if parser.parse_optional_punctuation("->"):
             parser.parse_characters("()")
 
