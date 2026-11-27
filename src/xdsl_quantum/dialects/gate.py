@@ -6,14 +6,14 @@ from xdsl.irdl import irdl_attr_definition, param_def
 from xdsl.parser import AttrParser
 from xdsl.printer import Printer
 
-from xdsl_quantum.dialects.angle.attrs import AngleType
-from xdsl_quantum.quantum_operation import (
+from xdsl_quantum.core.arity import SingleQubit
+from xdsl_quantum.core.operation import (
     GateAttribute,
     QuantumOperationAttribute,
     QuantumOperationConstraint,
-    SingleQubit,
     Static,
 )
+from xdsl_quantum.dialects.angle.attrs import AngleType
 
 
 @irdl_attr_definition
