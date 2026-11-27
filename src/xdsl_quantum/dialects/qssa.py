@@ -15,12 +15,12 @@ from xdsl.irdl import (
     var_result_def,
 )
 
-from xdsl_quantum.dialects.qu import BitType
-from xdsl_quantum.quantum_operation import (
+from xdsl_quantum.core.operation import (
     MeasurementAttribute,
     QuantumOperationAttribute,
     QuantumOperationConstraint,
 )
+from xdsl_quantum.dialects.qu import BitType
 
 
 @irdl_op_definition

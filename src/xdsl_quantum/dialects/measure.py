@@ -1,9 +1,9 @@
 from xdsl.ir import Dialect
 from xdsl.irdl import irdl_attr_definition
 
-from xdsl_quantum.quantum_operation import (
+from xdsl_quantum.core.arity import SingleQubit
+from xdsl_quantum.core.operation import (
     MeasurementAttribute,
-    SingleQubit,
     Static,
 )
 

@@ -23,11 +23,7 @@ from dataclasses import dataclass
 
 from typing_extensions import TypeForm, TypeVar
 from xdsl.dialects.builtin import i1
-from xdsl.ir import (
-    Attribute,
-    ParametrizedAttribute,
-    TypeAttribute,
-)
+from xdsl.ir import Attribute, TypeAttribute
 from xdsl.irdl import (
     AnyInt,
     AnyRange,
@@ -40,8 +36,10 @@ from xdsl.irdl import (
 )
 from xdsl.utils.exceptions import VerifyException
 
+from .arity import QubitArityAttribute
 
-class QuantumOperationAttribute(ParametrizedAttribute, ABC):
+
+class QuantumOperationAttribute(QubitArityAttribute, ABC):
     """
     Base attribute for all quantum operations.
     """
@@ -60,15 +58,6 @@ class QuantumOperationAttribute(ParametrizedAttribute, ABC):
         """
         The types of the classical results of the operation. If the operation
         takes no inputs this should return `()`.
-        """
-
-    @property
-    @abstractmethod
-    def num_qubits(self) -> int | None:
-        """
-        How many qubits this operation acts on.
-        If the operation takes a variable or unknown number of qubits then this should
-        return None.
         """
 
 
@@ -188,23 +177,3 @@ class MeasurementAttribute(QuantumOperationAttribute, ABC):
     @property
     def classical_results(self) -> tuple[TypeAttribute, ...]:
         return (i1,)
-
-
-class SingleQubit(QuantumOperationAttribute, ABC):
-    """
-    A quantum operation on a single qubit.
-    """
-
-    @property
-    def num_qubits(self) -> int:
-        return 1
-
-
-class TwoQubit(QuantumOperationAttribute, ABC):
-    """
-    A quantum operation on two qubits.
-    """
-
-    @property
-    def num_qubits(self) -> int:
-        return 2

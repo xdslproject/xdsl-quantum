@@ -11,7 +11,7 @@ from xdsl.irdl import (
     irdl_attr_definition,
 )
 
-from xdsl_quantum.quantum_operation import (
+from xdsl_quantum.core.operation import (
     GateAttribute,
     QuantumOperationAttribute,
     QuantumOperationConstraint,
